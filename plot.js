@@ -26,8 +26,8 @@ PlotChart.prototype.plotChart = function() {
 PlotChart.prototype.updateChart = function() {
   var value = _.random(0, 500);
   var data = {};
-  data.keys = {"x":"x","value":["data1"]};
-  data.json = [{"x": this.counter, "data1": value}];
+  data.keys = {"x":"x","value":["data1", "data2"]};
+  data.json = [{"x": this.counter, "data1": value, "data2": _.random(0,400)}];
   this.counter = this.counter + 1;
   //data.length = 2;
   this.chart.flow(data);
