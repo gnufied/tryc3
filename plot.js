@@ -11,24 +11,27 @@ PlotChart.prototype.plotChart = function() {
   config.data.keys = {"x":"x","value":["data1"]};
   config.data.json = [];
   for(i = 0; i < 10; i++) {
-    config.data.json.push({"x": (new Date()).getTime() - i*1000, "data1": _.random(0,500)});
+    config.data.json.push({"x": i, "data1": _.random(0,500)});
+    this.counter = this.counter + 1;
   }
   // config.data.json.push({"x": (new Date()).getTime(), "data1": _.random(0,500)});
   config.axis = {};
-  config.axis.x = {"type":"timeseries","tick":{"format":"%H:%M:%S"}};
+  // config.axis.x = {"type":"timeseries","tick":{"format":"%H:%M:%S"}};
   config.axis.y = {"label":{"text":"Number of items","position":"outer-middle"}};
   config.data.types={"data1":"line"};
   this.chart = c3.generate(config);
-  window.setInterval(this.updateChart, 1000);
+  window.setTimeout(this.updateChart, 1000);
 };
 
 PlotChart.prototype.updateChart = function() {
   var value = _.random(0, 500);
   var data = {};
   data.keys = {"x":"x","value":["data1"]};
-  data.json = [{"x": new Date(), "data1": value}];
+  data.json = [{"x": this.counter, "data1": value}];
+  this.counter = this.counter + 1;
   //data.length = 2;
   this.chart.flow(data);
+  window.setTimeout(this.updateChart, _.random(500, 1000));
 };
 
 
